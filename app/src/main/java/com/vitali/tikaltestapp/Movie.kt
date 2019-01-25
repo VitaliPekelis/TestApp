@@ -1,12 +1,13 @@
 package com.vitali.tikaltestapp
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "movies")
+@Entity(tableName = "movies", indices = [Index(value = ["id"], unique = true)])
 data class Movie(
-    @PrimaryKey (autoGenerate = true) val index:Long,
+    @PrimaryKey(autoGenerate = true)val index: Long,
     @field:SerializedName("id") val id: Long,
     @field:SerializedName("vote_count") val voteCount: Int = 0,
     @field:SerializedName("video") val video: Boolean = false,

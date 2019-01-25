@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 
 private const val VISIBLE_THRESHOLD = 8
 
-class MainActivityViewModel(private val repository: MoviesRepo): ViewModel()
+class MainActivityViewModel(private val repository: MoviesRepository): ViewModel()
 {
 
     private var moviesResult  = MutableLiveData<MoviesResult>()
@@ -23,7 +23,7 @@ class MainActivityViewModel(private val repository: MoviesRepo): ViewModel()
 
     fun getMovies()
     {
-        val result = repository.requestMovies()
+        val result = repository.requestMoviesOnFirstTime()
         moviesResult.postValue(result)
     }
 

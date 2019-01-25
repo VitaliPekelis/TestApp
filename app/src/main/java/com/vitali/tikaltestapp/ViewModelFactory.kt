@@ -3,7 +3,7 @@ package com.vitali.tikaltestapp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-class ViewModelFactory(private val repository: MoviesRepo): ViewModelProvider.Factory {
+class ViewModelFactory(private val repository: MoviesRepository): ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T
     {

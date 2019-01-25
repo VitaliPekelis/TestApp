@@ -4,9 +4,12 @@ import androidx.lifecycle.MutableLiveData
 import com.vitali.scanovatetest.Logger
 
 
-class MoviesRepo(
-    private val service : MoviesService,
-    private val cache : MoviesCache)
+private const val KEY_PAGE = "KEY_PAGE"
+
+class MoviesRepository(
+    private val service: MoviesService,
+    private val cache: MoviesCache,
+    private val sharedPrefHelper: SharedPrefHelper)
 {
 
     private val liveDataNetworkErrors = MutableLiveData<String>()
@@ -16,14 +19,17 @@ class MoviesRepo(
     private var totalPage = 1
 
 
-    fun requestMovies(): MoviesResult
+    fun requestMoviesOnFirstTime(): MoviesResult
     {
         Logger.logDebug(logText = "New Query Movies")
-        lastRequestedPage = 1
         totalPage = 1
+        lastRequestedPage = 1
+
+        // fetch first page on start
         fetchAndSaveMovies()
 
         val liveDataMovies = cache.getAll()
+        lastRequestedPage = sharedPrefHelper.getSharedPrefInt(KEY_PAGE, defValue = 1)
 
         return MoviesResult(liveDataMovies, liveDataNetworkErrors)
     }
@@ -40,12 +46,15 @@ class MoviesRepo(
 
         isRequestInProgress = true
 
+        Logger.logDebug(logText = "lastRequestedPage $lastRequestedPage")
+
         fetchMovies(service, lastRequestedPage,
-            { movies, countPages ->
+            { movies, countPages,page ->
                 cache.insert(movies)
                 {
                     totalPage = countPages
                     lastRequestedPage++
+                    sharedPrefHelper.setSharedPref(KEY_PAGE, page, false)
                     isRequestInProgress = false
                 }
 

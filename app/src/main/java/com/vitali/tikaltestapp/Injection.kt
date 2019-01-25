@@ -1,6 +1,7 @@
 package com.vitali.tikaltestapp
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.lifecycle.ViewModelProvider
 import java.util.concurrent.Executors
 
@@ -12,8 +13,12 @@ object Injection {
     }
 
 
-    private fun provideMoviesRepo(context: Context): MoviesRepo {
-        return MoviesRepo(MoviesService.create(), provideDb(context))
+    private fun provideMoviesRepo(context: Context): MoviesRepository {
+        return MoviesRepository(MoviesService.create(), provideDb(context), provideSharedPref(context))
+    }
+
+    private fun provideSharedPref(context: Context): SharedPrefHelper {
+        return SharedPrefHelper.create(context)
     }
 
 

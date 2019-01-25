@@ -7,15 +7,18 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.vitali.scanovatetest.Logger
 import kotlinx.android.synthetic.main.activity_main.*
 
+private const val  NUMBER_OF_COLUMN = 2
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel :MainActivityViewModel
     private val adapter = MoviesAdapter()
+    private val layoutManager = GridLayoutManager(this, NUMBER_OF_COLUMN)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,12 +34,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
+        setUpLayoutManager()
         setUpListeners()
         setUpAdapter()
     }
 
+    private fun setUpLayoutManager()
+    {
+        list_rv.layoutManager = this.layoutManager
+    }
+
     private fun setUpListeners() {
-        val layoutManager = list_rv.layoutManager as androidx.recyclerview.widget.GridLayoutManager
         list_rv.addOnScrollListener(object : RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -50,6 +58,7 @@ class MainActivity : AppCompatActivity() {
         })
 
     }
+
 
     private fun setUpAdapter()
     {
