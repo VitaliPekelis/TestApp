@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import com.vitali.scanovatetest.Logger
 
 class MovieViewHolder(view: View, onMovieClick:(Movie) -> Unit) :RecyclerView.ViewHolder(view)
 {
@@ -27,13 +28,10 @@ class MovieViewHolder(view: View, onMovieClick:(Movie) -> Unit) :RecyclerView.Vi
     {
         if (movie == null)
         {
-            //val resources = itemView.resources
-            //name.text = resources.getString(R.string.loading)
-
-            /*description.visibility = View.GONE
-            language.visibility = View.GONE
-            stars.text = resources.getString(R.string.unknown)
-            forks.text = resources.getString(R.string.unknown)*/
+            Logger.logDebug(logText = "movie == null")
+            val resources = itemView.resources
+            titleV.visibility = View.VISIBLE
+            titleV.text = resources.getString(R.string.loading)
         }
         else
         {
@@ -45,7 +43,8 @@ class MovieViewHolder(view: View, onMovieClick:(Movie) -> Unit) :RecyclerView.Vi
     {
         this.movie = item
 
-        titleV.text = item.title
+        titleV.visibility = View.GONE
+
         Picasso.get().load("https://image.tmdb.org/t/p/w300${item.posterPath}").into(imageV)
     }
 

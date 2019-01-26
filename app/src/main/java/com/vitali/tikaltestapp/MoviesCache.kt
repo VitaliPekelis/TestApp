@@ -1,8 +1,9 @@
 package com.vitali.tikaltestapp
 
-import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import com.vitali.scanovatetest.Logger
 import java.util.concurrent.Executor
+
 
 class MoviesCache (
     private val moveDao: MovieDao,
@@ -17,7 +18,7 @@ class MoviesCache (
         }
     }
 
-    fun getAll(): LiveData<List<Movie>>
+    fun getAll(): /*LiveData<PagedList<Movie>>*/DataSource.Factory<Int, Movie>
     {
         return moveDao.movies()
     }

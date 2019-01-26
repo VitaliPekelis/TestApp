@@ -4,15 +4,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-
-private const val VISIBLE_THRESHOLD = 8
+import androidx.paging.PagedList
 
 class MainActivityViewModel(private val repository: MoviesRepository): ViewModel()
 {
 
     private var moviesResult  = MutableLiveData<MoviesResult>()
 
-    val movies: LiveData<List<Movie>> = Transformations.switchMap(moviesResult) {
+    val movies: LiveData<PagedList<Movie>> = Transformations.switchMap(moviesResult) {
         it.data
     }
     val networkErrors: LiveData<String> = Transformations.switchMap(moviesResult) { it ->
@@ -27,16 +26,6 @@ class MainActivityViewModel(private val repository: MoviesRepository): ViewModel
     {
         val result = repository.requestMoviesOnFirstTime()
         moviesResult.postValue(result)
-    }
-
-
-
-    fun listScrolled(visibleItemCount: Int, lastVisibleItemPosition: Int, totalItemCount: Int)
-    {
-        if (visibleItemCount + lastVisibleItemPosition + VISIBLE_THRESHOLD >= totalItemCount)
-        {
-            repository.requestMoreMovies()
-        }
     }
 
 }

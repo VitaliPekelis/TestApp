@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.vitali.scanovatetest.Logger
@@ -60,7 +61,6 @@ class MoviesFragment : Fragment() {
 
     private fun setupRecyclerView() {
         setUpLayoutManager()
-        setUpListeners()
         setUpAdapter()
     }
 
@@ -71,27 +71,12 @@ class MoviesFragment : Fragment() {
         list_rv.layoutManager = this.layoutManager
     }
 
-    private fun setUpListeners() {
-        list_rv.addOnScrollListener(object : RecyclerView.OnScrollListener(){
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-
-                val totalItemCount = layoutManager.itemCount
-                val visibleItemCount = layoutManager.childCount
-                val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
-
-                viewModel.listScrolled(visibleItemCount, lastVisibleItem, totalItemCount)
-            }
-        })
-
-    }
-
 
     private fun setUpAdapter()
     {
         list_rv.adapter = this.adapter
 
-        viewModel.movies.observe(this, Observer<List<Movie>> {
+        viewModel.movies.observe(this, Observer<PagedList<Movie>> {
             Logger.logDebug("MoviesFragment", "list: ${it?.size}")
             showEmptyList(it?.size == 0)
             adapter.submitList(it)

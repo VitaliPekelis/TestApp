@@ -1,10 +1,12 @@
 package com.vitali.tikaltestapp
 
-import androidx.lifecycle.LiveData
+
+import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+
 
 @Dao
 interface MovieDao {
@@ -13,7 +15,7 @@ interface MovieDao {
     fun insert(list:List<Movie>)
 
     @Query("SELECT * FROM movies ORDER BY `index` ASC")
-    fun movies(): LiveData<List<Movie>>
+    fun movies(): /*LiveData<List<Movie>>*/DataSource.Factory<Int, Movie>
 
     @Query("SELECT * FROM movies ORDER BY `index` DESC LIMIT 1")
     fun lastMovie(): Movie

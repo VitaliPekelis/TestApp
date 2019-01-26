@@ -1,11 +1,12 @@
 package com.vitali.tikaltestapp
 
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
-class MoviesAdapter(private val onMovieClick:(Movie) -> Unit) : ListAdapter<Movie, RecyclerView.ViewHolder> (MOVIE_COMPARATOR)
+class MoviesAdapter(private val onMovieClick:(Movie) -> Unit) : PagedListAdapter<Movie, RecyclerView.ViewHolder>(MOVIE_COMPARATOR)
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
     {
@@ -15,9 +16,7 @@ class MoviesAdapter(private val onMovieClick:(Movie) -> Unit) : ListAdapter<Movi
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int)
     {
         val repoItem = getItem(position)
-        if (repoItem != null) {
-            (holder as MovieViewHolder).bind(repoItem)
-        }
+        (holder as MovieViewHolder).bind(repoItem)
     }
 
     companion object

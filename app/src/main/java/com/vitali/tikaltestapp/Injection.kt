@@ -14,11 +14,7 @@ object Injection {
 
 
     private fun provideMoviesRepo(context: Context): MoviesRepository {
-        return MoviesRepository(MoviesService.create(), provideDb(context), provideSharedPref(context))
-    }
-
-    private fun provideSharedPref(context: Context): SharedPrefHelper {
-        return SharedPrefHelper.create(context)
+        return MoviesRepository(MoviesService.create(), provideDb(context))
     }
 
 
