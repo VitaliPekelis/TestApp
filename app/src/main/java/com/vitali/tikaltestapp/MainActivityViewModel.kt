@@ -19,6 +19,8 @@ class MainActivityViewModel(private val repository: MoviesRepository): ViewModel
         it.networkErrors
     }
 
+    val clickedMovie = MutableLiveData<Movie>()
+
 
 
     fun getMovies()

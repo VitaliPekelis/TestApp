@@ -5,11 +5,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
-class MoviesAdapter : ListAdapter<Movie, RecyclerView.ViewHolder> (MOVIE_COMPARATOR)
+class MoviesAdapter(private val onMovieClick:(Movie) -> Unit) : ListAdapter<Movie, RecyclerView.ViewHolder> (MOVIE_COMPARATOR)
 {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder
     {
-        return MovieViewHolder.create(parent)
+        return MovieViewHolder.create(parent, onMovieClick)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int)
