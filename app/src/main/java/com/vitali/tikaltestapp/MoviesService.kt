@@ -11,7 +11,7 @@ import retrofit2.http.Query
 
     fun fetchMovies(service: MoviesService,
                     page:Int,
-                    onSuccess: (movies: List<Movie>, totalPages:Int) -> Unit,
+                    onSuccess: (movies: List<Movie>) -> Unit,
                     onError:(error:String) -> Unit)
     {
         service.fetchMovies(page).enqueue(object:Callback<MoviesResponse>{
@@ -28,7 +28,7 @@ import retrofit2.http.Query
                     val body = response.body()
                     body?.let {
                         it.setupPage()
-                        onSuccess(it.items, it.totalPages)
+                        onSuccess(it.items)
                     }
                 }
                 else

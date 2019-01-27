@@ -47,7 +47,7 @@ class RepoBoundaryCallback(
         Logger.logDebug(logText = "lastRequestedPage $lastRequestedPage")
 
         fetchMovies(service, lastRequestedPage,
-            { movies, countPages ->
+            { movies ->
                 cache.insert(movies)
                 {
                     lastRequestedPage++

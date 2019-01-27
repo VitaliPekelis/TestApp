@@ -2,4 +2,13 @@
     <string name="app_name">TikalTestApp</string>
     <string name="no_results">No results 😓</string>
     <string name="loading">Loading</string>
+    <string name="no_movie_selected">No movie selected</string>
+
+    <string name="release_year">Release year</string>
+    <string name="rating_example">7.2/10s</string>
+    <string name="overview">Overview</string>
+    <string name="poster">poster</string>
+    <string name="title">Title</string>
+    <string name="imdb">IMDB</string>
+    <string name="out_of_ten_rating">%.1f/10</string>
 </resources>

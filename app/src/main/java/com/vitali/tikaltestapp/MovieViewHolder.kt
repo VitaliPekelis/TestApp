@@ -43,9 +43,25 @@ class MovieViewHolder(view: View, onMovieClick:(Movie) -> Unit) :RecyclerView.Vi
     {
         this.movie = item
 
-        titleV.visibility = View.GONE
+        if(item.posterPath == null)
+        {
+            titleV.text = item.title
+            titleV.visibility = View.VISIBLE
+        }
+        else
+        {
+            titleV.visibility = View.GONE
+        }
 
-        Picasso.get().load("https://image.tmdb.org/t/p/w300${item.posterPath}").into(imageV)
+        if(item.posterPath == null)
+        {
+            imageV.setImageResource(R.drawable.bg_movie_default)
+        }
+        else
+        {
+            Picasso.get().load("https://image.tmdb.org/t/p/w300${item.posterPath}").into(imageV)
+        }
+
     }
 
     companion object {

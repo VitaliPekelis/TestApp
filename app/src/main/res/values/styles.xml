@@ -8,4 +8,17 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <style name="cell_text_style" parent="TextAppearance.AppCompat.Light.Widget.PopupMenu.Large">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="RatingBar" parent="android:style/Widget.DeviceDefault.Light.RatingBar.Small">
+        <item name="android:progressTint">@android:color/white</item>
+        <item name="android:secondaryProgressTint">@android:color/white</item>
+        <item name="android:progressBackgroundTint">@android:color/white</item>
+    </style>
+
 </resources>
