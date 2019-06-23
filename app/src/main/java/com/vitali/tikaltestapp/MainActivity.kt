@@ -14,14 +14,12 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel :MainActivityViewModel
 
-    private var movieDetailsFragment:MovieDetailsFragment? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        movieDetailsFragment = movie_details_fragment as? MovieDetailsFragment ?: MovieDetailsFragment.newInstance()
+        val movieDetailsFragment = movie_details_fragment as? MovieDetailsFragment ?: MovieDetailsFragment.newInstance()
 
         viewModel = ViewModelProviders.of(
             this,
@@ -37,13 +35,9 @@ class MainActivity : AppCompatActivity() {
                 // on all except large and extra large screen device ...
                 Logger.logDebug(logText = "Open Movie Details Fragment")
 
-                addFragment(R.id.fragments_container, movieDetailsFragment!!)
-
+                addFragment(R.id.fragments_container, movieDetailsFragment)
             }
-
         })
-
     }
-
 
 }

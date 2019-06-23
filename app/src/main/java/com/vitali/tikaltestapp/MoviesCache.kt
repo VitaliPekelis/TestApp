@@ -18,7 +18,7 @@ class MoviesCache (
         }
     }
 
-    fun getAll(): /*LiveData<PagedList<Movie>>*/DataSource.Factory<Int, Movie>
+    fun getAll(): DataSource.Factory<Int, Movie>
     {
         return moveDao.movies()
     }

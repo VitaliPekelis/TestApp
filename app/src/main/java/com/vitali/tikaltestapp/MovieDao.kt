@@ -15,7 +15,7 @@ interface MovieDao {
     fun insert(list:List<Movie>)
 
     @Query("SELECT * FROM movies ORDER BY `index` ASC")
-    fun movies(): /*LiveData<List<Movie>>*/DataSource.Factory<Int, Movie>
+    fun movies(): DataSource.Factory<Int, Movie>
 
     @Query("SELECT * FROM movies ORDER BY `index` DESC LIMIT 1")
     fun lastMovie(): Movie

@@ -18,7 +18,6 @@ import retrofit2.http.Query
             override fun onFailure(call: Call<MoviesResponse>, t: Throwable)
             {
                 onError(t.message ?: "Unknown error")
-
             }
 
             override fun onResponse(call: Call<MoviesResponse>, response: Response<MoviesResponse>)

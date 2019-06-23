@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TikalTestApp</string>
+    <string name="app_name">TestApp</string>
     <string name="no_results">No results 😓</string>
     <string name="loading">Loading</string>
     <string name="no_movie_selected">No movie selected</string>
