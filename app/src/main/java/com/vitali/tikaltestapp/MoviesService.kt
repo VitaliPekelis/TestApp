@@ -1,5 +1,7 @@
 package com.vitali.tikaltestapp
 
+import com.facebook.stetho.okhttp3.StethoInterceptor
+import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -46,11 +48,17 @@ interface MoviesService {
     fun fetchMovies(@Query("page") page:Int): Call<MoviesResponse>
 
     companion object {
-        fun create() : MoviesService
-        {
+        fun create() : MoviesService {
+            val clientBuilder = OkHttpClient.Builder()
+
+            if(BuildConfig.DEBUG){
+                clientBuilder.addNetworkInterceptor(StethoInterceptor())
+            }
+
             return Retrofit.Builder()
                 .baseUrl("https://api.themoviedb.org/")
                 .addConverterFactory(GsonConverterFactory.create())
+                .client(clientBuilder.build())
                 .build()
                 .create(MoviesService::class.java)
         }

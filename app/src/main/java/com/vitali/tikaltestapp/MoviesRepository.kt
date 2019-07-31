@@ -20,8 +20,8 @@ class MoviesRepository(
 
         val config = PagedList.Config.Builder()
             .setPageSize(DATA_PAGE_SIZE)
-            //.setInitialLoadSizeHint(50) //default page size * 3
-            //.setPrefetchDistance(20)//default: page size
+            .setInitialLoadSizeHint(60) //default page size * 3
+            .setPrefetchDistance(DATA_PAGE_SIZE)//default: page size
             //.setEnablePlaceholders(true)//default: true
             .build()
 
